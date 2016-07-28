@@ -2,17 +2,17 @@
 ### sum definitions                                         ###
 ###############################################################
 
-TARGET = WICKED
+TARGET =
 CC = wcc386
-#CCOPTS = -w1 -bt=dos -d2 -5r -mf -oneatmiler
-#CCOPTS = -w1 -bt=dos -5r -mf -oneatmiler
-CCOPTS = -w1 -bt=dos -5r -mf -fpi -fp5 -oneatxl+ -I\\WATCOM\h\\ -I.
+CCOPTS = -w1 -bt=dos -d2 -5r -mf -oneatmiler
+CCOPTS = -w1 -bt=dos -5r -mf -oneatmiler
+CCOPTS = -w1 -bt=dos -5r -mf -fpi -fp5 -oneatxl+ -I\WATCOM\h\ -I.
 
 LINKER = wlink
 LOPTS = debug all
 LOPTS =
 
-ASM = lzasm
+ASM = tasm
 AOPTS = /ml /m2 /zd
 AOPTS = /ml /m2
 
@@ -26,22 +26,21 @@ SYSTEM = pmodew
 ###############################################################
 ### ok, now let's go with files                             ###
 ###############################################################
-T_FILES = $(TARGET).obj files.obj shutup.obj gus.obj modload.obj modplay.obj s3mload.obj loaders.obj
-
+T_FILES = $(TARGET).obj files.obj shutup.obj gus.obj modload.obj &
+          modplay.obj s3mload.obj loaders.obj
 O_FILES = $(TARGET) files shutup gus modload modplay s3mload loaders
+
 
 
 ###############################################################
 ### rite, it's compilin^linkin' time!                       ###
 ###############################################################
 $(TARGET).exe: $(T_FILES) makefile
-		$(LINKER) $(LOPTS) system $(SYSTEM) file {$(O_FILES)}
-#		$(COMPRESS) $(TARGET).exe
+               *$(LINKER) $(LOPTS) system $(SYSTEM) file {$(O_FILES)}
+               $(COMPRESS) $(TARGET).exe
 
-.c.obj:
-		$(CC) $(CCOPTS) $<
+.c.obj
+               *$(CC) $(CCOPTS) $<
 
-.ASM.obj:
-		$(ASM) $(AOPTS) $<
-
-all:: $(TARGET).exe
+.asm.obj
+               $(ASM) $(AOPTS) $<
